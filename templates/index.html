@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wechat</title>
+</head>
+<body>
+  <h1>欢迎登录：{{user_dict.User.NickName}}</h1>
+    <h3>最近联系人</h3>
+    <ul>
+        {% for user in user_dict.ContactList%}
+        <li>{{user.NickName}}</li>
+        {% endfor %}
+    </ul>
+    <a href="/contact_all/" target="_blank">查看更多联系人</a>
+    <h3>微信订阅号</h3>
+    {% for sub in user_dict.MPSubscribeMsgList %}
+    <div>
+        <h3>{{ sub.NickName }}(文章数量：{{ sub.MPArticleCount }})</h3>
+        <ul>
+        {% for artlist in sub.MPArticleList %}
+            <li><a href="{{ artlist.Url }}" target="_blank">{{ artlist.Title }}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</body>
+</html>

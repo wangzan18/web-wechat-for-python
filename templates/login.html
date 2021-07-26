@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>Wechat Login</title>
+    </head>
+    <body>
+        <img id="qcode" src="https://login.weixin.qq.com/qrcode/{{qcode}}" />
+
+        <script src='/static/jquery-1.12.4.js'></script>
+        <script>
+            $(function(){
+               checkLogin()
+            })
+            function checkLogin(){
+                $.ajax({
+                    url:'/check-login',
+                    type: 'GET',
+                    dataType:'JSON',
+                    success: function(arg){
+                        if (arg.code == 408){
+                            checkLogin()
+                        }
+                        else if (arg.code == 201){
+                            $('#qcode').attr('src',arg.avatar)
+                            checkLogin()
+                        }
+                        else if (arg.code == 200){
+                            window.location.href="/index"
+                        }
+                    }
+                    
+                })
+            }
+        </script>
+    </body>
+</html>
