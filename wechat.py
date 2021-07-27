@@ -1,7 +1,6 @@
 from flask import Flask, render_template, session, jsonify
 import time, requests, re
 from bs4 import BeautifulSoup
-from werkzeug.wrappers import response
 
 
 app = Flask(__name__)
@@ -71,10 +70,14 @@ def index():
     session['current_user_info'] = user_dict['User']
     return render_template('index.html', user_dict=user_dict)
 
-
+@app.route('/contactlist')
+def contactlist():
+    ticket = session.get('ticket')
+    pass
+    return "200"
 
 
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=80, host='0.0.0.0')
